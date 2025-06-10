@@ -158,7 +158,7 @@ class MenuSectionAdmin(admin.ModelAdmin):
         count = obj.items.count()
         available_count = obj.items.filter(is_available=True).count()
         if count > 0:
-            url = reverse('admin:your_app_name_fooditem_changelist') + f'?menu_section__id__exact={obj.id}'
+            url = reverse('admin:outlet_fooditem_changelist') + f'?menu_section__id__exact={obj.id}'
             return format_html('<a href="{}">{} total ({} available)</a>', url, count, available_count)
         return '0 items'
     items_count.short_description = 'Food Items'
