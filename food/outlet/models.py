@@ -129,7 +129,7 @@ class OutletStaff(BaseModel):
         unique_together = ['outlet', 'user']
     
     def __str__(self):
-        return f"{self.user.full_name} - {self.outlet.name} ({self.role})"
+        return f"{self.user.username} - {self.outlet.name} ({self.role})"
 
 # Menu and Food Items
 class MenuSection(BaseModel):
@@ -259,7 +259,7 @@ class Review(BaseModel):
     
     def __str__(self):
         target = self.food_item.name if self.food_item else self.outlet.name
-        return f"{self.customer.full_name} - {target} ({self.rating}★)"
+        return f"{self.customer.username} - {target} ({self.rating}★)"
 
 # Favorites
 class Favorite(BaseModel):
@@ -276,7 +276,7 @@ class Favorite(BaseModel):
     
     def __str__(self):
         target = self.food_item.name if self.food_item else self.outlet.name
-        return f"{self.customer.full_name} - {target}"
+        return f"{self.customer.username} - {target}"
 
 # Search and Analytics
 class SearchLog(BaseModel):
@@ -288,4 +288,4 @@ class SearchLog(BaseModel):
     results_count = models.PositiveIntegerField(default=0)
     
     def __str__(self):
-        return f"{self.search_query} - {self.created_at.date()}"
+        return f"{self.search_query} - {self.create_time}"

@@ -17,7 +17,7 @@ class FoodCategoryAdmin(admin.ModelAdmin):
     def items_count(self, obj):
         count = obj.fooditem_set.count()
         if count > 0:
-            url = reverse('admin:your_app_name_fooditem_changelist') + f'?category__id__exact={obj.id}'
+            url = reverse('admin:outlet_fooditem_changelist') + f'?category__id__exact={obj.id}'
             return format_html('<a href="{}">{} items</a>', url, count)
         return '0 items'
     items_count.short_description = 'Food Items'
@@ -32,7 +32,7 @@ class CuisineAdmin(admin.ModelAdmin):
     def restaurants_count(self, obj):
         count = obj.restaurant_set.count()
         if count > 0:
-            url = reverse('admin:your_app_name_restaurant_changelist') + f'?cuisines__id__exact={obj.id}'
+            url = reverse('admin:outlet_restaurant_changelist') + f'?cuisines__id__exact={obj.id}'
             return format_html('<a href="{}">{} restaurants</a>', url, count)
         return '0 restaurants'
     restaurants_count.short_description = 'Restaurants'
@@ -76,7 +76,7 @@ class RestaurantAdmin(admin.ModelAdmin):
         count = obj.outlets.count()
         active_count = obj.outlets.filter(status='active').count()
         if count > 0:
-            url = reverse('admin:your_app_name_outlet_changelist') + f'?restaurant__id__exact={obj.id}'
+            url = reverse('admin:outlet_outlet_changelist') + f'?restaurant__id__exact={obj.id}'
             return format_html('<a href="{}">{} total ({} active)</a>', url, count, active_count)
         return '0 outlets'
     outlets_count.short_description = 'Outlets'
