@@ -29,42 +29,42 @@ class UserAuthSerializer(serializers.Serializer):
     # )
 
     username = serializers.CharField(required=False)
-    email = serializers.CharField(required=False)
+    # email = serializers.CharField(required=False)
     phone = serializers.CharField(required=False)
-    firebase_uid = serializers.CharField(required=False)
+    # firebase_uid = serializers.CharField(required=False)
     password = serializers.CharField(required=False)
     # login_type = serializers.ChoiceField(required=True, choices=LOGIN_TYPE)
 
     # LOGIN_TYPE_DICT = dict(LOGIN_TYPE)
 
-    def validate(self, attrs):
-        login_type = attrs.get('login_type')
-        email = attrs.get('email')
-        phone = attrs.get('phone')
-        password = attrs.get('password')
-        firebase_uid = attrs.get('firebase_uid')
+    # def validate(self, attrs):
+    #     # login_type = attrs.get('login_type')
+    #     email = attrs.get('email')
+    #     phone = attrs.get('phone')
+    #     password = attrs.get('password')
+    #     # firebase_uid = attrs.get('firebase_uid')
 
-        if login_type in ['G', 'A', 'F'] and not firebase_uid:
-            readable_login_type = self.LOGIN_TYPE_DICT[login_type]
-            raise ValidationError(_("Enter firebase_uid for {} login").format(readable_login_type))
+    #     # if login_type in ['G', 'A', 'F'] and not firebase_uid:
+    #     #     readable_login_type = self.LOGIN_TYPE_DICT[login_type]
+    #     #     raise ValidationError(_("Enter firebase_uid for {} login").format(readable_login_type))
 
-        elif not (email or phone or firebase_uid):
-            raise ValidationError(_("Either email or phone should be provided"))
+    #     if not (email or phone):
+    #         raise ValidationError(_("Either email or phone should be provided"))
 
-        elif email and not password:
-            raise ValidationError(_("Enter password for email login"))
+    #     elif email and not password:
+    #         raise ValidationError(_("Enter password for email login"))
 
-        elif password and not email:
-            raise ValidationError(_("Enter email for password login"))
+    #     elif password and not email:
+    #         raise ValidationError(_("Enter email for password login"))
 
-        elif phone:
-            if not ApplicationUser.objects.filter(phone=phone).exists():
-                raise ValidationError(_("Phone number doesn't exist"))
+    #     elif phone:
+    #         if not ApplicationUser.objects.filter(phone=phone).exists():
+    #             raise ValidationError(_("Phone number doesn't exist"))
 
-            elif not ApplicationUser.objects.filter(phone=phone).exists():
-                raise ValidationError(_("Phone number doesn't exist with this login type"))
+    #         elif not ApplicationUser.objects.filter(phone=phone).exists():
+    #             raise ValidationError(_("Phone number doesn't exist with this login type"))
 
-        return attrs
+    #     return attrs
 class BaseUserSerializer(serializers.ModelSerializer):
     photo = serializers.SerializerMethodField()
     password = serializers.CharField(write_only=True)

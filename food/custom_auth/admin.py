@@ -1,13 +1,14 @@
 from django.contrib import admin
 from django.db.models import BooleanField, Case, Value, When
 
-from food.custom_auth.models import (ApplicationUser, MultiToken,
+from food.custom_auth.models import (ApplicationUser, MultiToken, LoginOtp,
                                             UserActivity, CustomPermission)
 
 # Register your models here.
 # admin.site.register(MultiToken)
 # admin.site.register()
 admin.site.register(UserActivity)
+admin.site.register(LoginOtp)
 from datetime import timedelta
 
 from django.contrib.auth import get_user_model
