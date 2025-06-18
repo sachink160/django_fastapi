@@ -113,6 +113,12 @@ class UserAdmin(UserAdmin):
                 )
             },
         ),
+         (
+            "Permissions",
+            {
+                "fields": ("groups", "user_permissions"),
+            },
+        )
         # (
         #     "Extra",
         #     {
